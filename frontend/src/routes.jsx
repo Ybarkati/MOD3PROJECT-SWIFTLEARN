@@ -17,6 +17,8 @@ import HomeworkIndex from "./pages/neastedPages/Homework/Index";
 import NewHomework from "./pages/neastedPages/Homework/New";
 import HomeworkEdit from "./pages/neastedPages/Homework/Edit";
 import ShowHomework from "./pages/neastedPages/Homework/Show";
+import NewStudent from "./pages/neastedPages/Students/New";
+import Student from "./pages/neastedPages/Students/Index";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -137,20 +139,25 @@ export const routes = [
         
         name: "index",
         path: "/",
-        element: <CoursesIndex />,
+        element: <Student />,
+      },
+      {
+        name: "new",
+        path: "/newStudent",
+        element: <NewStudent />,
       },
       
-      {
-        name: "edit",
-        path: "/edit",
-        element: <CourseEdit />,
-      },
-      {
+      // {
+      //   name: "edit",
+      //   path: "/edit",
+      //   element: <CourseEdit />,
+      // },
+      // {
         
-        name: "id",
-        path: "/:id",
-        element: <Show />,
-      },
+      //   name: "id",
+      //   path: "/:id",
+      //   element: <Show />,
+      // },
       
     ],
   }

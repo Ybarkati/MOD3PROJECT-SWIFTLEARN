@@ -11,7 +11,11 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: true 
-    }
+    },
+    user: { 
+        type: String, 
+        required: true 
+     },
 })
 
 const allowStudent = mongoose.model('allowStudent', userSchema)

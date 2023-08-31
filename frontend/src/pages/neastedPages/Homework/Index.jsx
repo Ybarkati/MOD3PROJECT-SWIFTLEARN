@@ -112,7 +112,7 @@ import { Link ,useNavigate} from "react-router-dom";
                           
                             className="text-xs font-semibold text-blue-gray-600"
                           >
-                           <Link to={`${name}`}><Button>More ...</Button></Link>
+                           <Link to={`${name}`}><Button variant="text" color="blue" >More ...</Button></Link>
                             
                             </Typography>
                             </td>
