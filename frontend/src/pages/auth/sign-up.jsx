@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import axios from "../../api";
+
 import {
   Card,
   CardHeader,
@@ -33,6 +35,37 @@ export function SignUp() {
   const handleSelectChange = (event) => {
     setForm({ ...form, role: event,userID:"" })
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+        const authResponse = await axios.post('/authU/register', form)
+        const token = authResponse.data.token
+
+        if (!token) {
+            setForm(emptyForm)
+            return
+        }
+        console.log('ok',token)
+        localStorage.setItem("token", token)
+
+        // const userResponse = await axios.get('/api/users', {
+        //     headers: {
+        //       Authorization: `Bearer ${localStorage.getItem('token')}`
+        //     }
+        //   })
+
+        // setUser(userResponse.data)
+        console.log('ok2')
+        navigate('/dashboard/home')
+
+    } catch(err) {
+
+        console.log(err)
+        alert(err)
+        
+    }
+}
   return (
     <>
       <img
@@ -84,7 +117,7 @@ export function SignUp() {
             </div>
           </CardBody>
           <CardFooter className="pt-0">
-            <Button variant="gradient" fullWidth onClick={()=>console.log(form)}>
+            <Button variant="gradient" fullWidth onClick={handleSubmit}>
               Sign Up
             </Button>
             <Typography variant="small" className="mt-6 flex justify-center">

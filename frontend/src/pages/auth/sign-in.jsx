@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from '../../api'
 import {
   Card,
   CardHeader,
@@ -16,13 +17,42 @@ let emptyForm = {
   email: ''
 }
 export function SignIn() {
+  const navigate=useNavigate()
   let [form, setForm] = useState(emptyForm)
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
     const handleSubmit= async (e)=>{
-      
+      e.preventDefault()
+
+        try {
+            const authResponse = await axios.post('/authU/login', form)
+            const token = authResponse.data.token
+    
+            if (!token) {
+                setForm(emptyForm)
+                return
+            }
+    
+            localStorage.setItem("token", token)
+    
+            // const userResponse = await axios.get('/api/users', {
+            //     headers: {
+            //       Authorization: `Bearer ${localStorage.getItem('token')}`
+            //     }
+            //   })
+    
+            // setUser(userResponse.data)
+    
+            navigate('/dashboard/home')
+
+        } catch(err) {
+
+            console.log(err)
+            alert(err.response.data.error)
+
+        }
     }
     
   return (
@@ -57,7 +87,7 @@ export function SignIn() {
             </div>
           </CardBody>
           <CardFooter className="pt-0">
-            <Button variant="gradient" fullWidth onClick={()=>console.log(form)}>
+            <Button variant="gradient" fullWidth onClick={handleSubmit}>
               Sign In
             </Button>
             <Typography variant="small" className="mt-6 flex justify-center">

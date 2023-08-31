@@ -30,7 +30,7 @@ app.use(cors())
 app.use('/api/posts', postRoutes)
 app.use('/api/comments', authorize, commentRoutes)
 app.use('/api/users', authorize, userRoutes)
-app.use('/auth', authRoutes)
+app.use('/authU', authRoutes)
 
 
 // Listen to the given port
