@@ -21,7 +21,7 @@ import {
   } from "@heroicons/react/24/outline";
 import { Link ,useNavigate} from "react-router-dom";
   
-  export function HomeworkIndex() {
+  export function HomeworkIndex({role}) {
     
     const navigate=useNavigate()
     return (
@@ -31,27 +31,43 @@ import { Link ,useNavigate} from "react-router-dom";
             <Typography variant="h6" color="white" className="text-xl">
               Homework
             </Typography>
+            {role!="student" &&
             <Menu placement="left-start">
-              <MenuHandler>
-                <IconButton size="sm" variant="text" color="blue-gray">
-                  <EllipsisVerticalIcon
-                    strokeWidth={3}
-                    fill="currenColor"
-                    className="h-6 w-6 text-white"
-                  />
-                </IconButton>
-              </MenuHandler>
-              <MenuList>
-                <MenuItem> <Link to={"new"}>Add courses</Link>  </MenuItem>
-                
-                
-              </MenuList>
-            </Menu>
+            <MenuHandler>
+              <IconButton size="sm" variant="text" color="blue-gray">
+                <EllipsisVerticalIcon
+                  strokeWidth={3}
+                  fill="currenColor"
+                  className="h-6 w-6 text-white"
+                />
+              </IconButton>
+            </MenuHandler>
+            <MenuList>
+              <MenuItem> <Link to={"newhomecreate"}>Add homework</Link>  </MenuItem>
+              
+              
+            </MenuList>
+          </Menu>
+            }
+            
           </CardHeader>
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
             <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
+                  {role=="student" ? <>{["title", "due"].map((el) => (
+                    <th
+                      key={el}
+                      className="border-b border-blue-gray-50 py-3 px-5 text-left"
+                    >
+                      <Typography
+                        variant="small"
+                        className="text-[11px] font-bold uppercase text-blue-gray-400"
+                      >
+                        {el}
+                      </Typography>
+                    </th>
+                  ))}</>:<>
                   {["title", "status", "due"].map((el) => (
                     <th
                       key={el}
@@ -65,6 +81,8 @@ import { Link ,useNavigate} from "react-router-dom";
                       </Typography>
                     </th>
                   ))}
+                  </>}
+                  
                 </tr>
               </thead>
               <tbody>
@@ -93,15 +111,15 @@ import { Link ,useNavigate} from "react-router-dom";
                             </div>
                           </div>
                         </td>
-                        
-                        <td className={className}>
+                        {role!="student" && <td className={className}>
                           <Chip
                             variant="gradient"
                             color={online ? "green" : "blue-gray"}
                             value={online ? "published": "unpublished"}
                             className="py-0.5 px-2 w-24 text-[11px] text-center font-medium"
                           />
-                        </td>
+                        </td>}
+                        
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
                             {date}

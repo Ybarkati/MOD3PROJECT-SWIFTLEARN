@@ -15,7 +15,7 @@ import {
 import { Link ,useNavigate, useParams} from "react-router-dom";
 import { useState } from "react";
   
-  export function HomeworkEdit() {
+  export function HomeworkEdit({role}) {
     const params=useParams()
     const [inputValue, setInputValue] = useState("");
     const [titleValue, setTitleValue] = useState("")

@@ -120,27 +120,43 @@ export const routes = [
         
         name: "index",
         path: "/",
+        isAllow:{
+          student:true,
+          teacher:true
+        },
         element: <HomeworkIndex />,
       },
       {
         name: "new",
-        path: "/new",
+        path: "/newhomecreate",
+        isAllow:{
+          student:false,
+          teacher:true
+        },
         element: <NewHomework />,
       },
-      {
-        name: "comments",
-        path: "/comments/:id/edit",
-        element: <NewCourses />,
-      },
+      // {
+      //   name: "comments",
+      //   path: "/comments/:id/edit",
+      //   element: <NewCourses />,
+      // },
       {
         name: "edit",
         path: "/:id/edit",
+        isAllow:{
+          student:false,
+          teacher:true
+        },
         element: <HomeworkEdit />,
       },
       {
         
         name: "id",
         path: "/:id",
+        isAllow:{
+          student:true,
+          teacher:true
+        },
         element: <ShowHomework />,
       },
       
