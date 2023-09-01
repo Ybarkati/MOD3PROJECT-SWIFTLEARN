@@ -13,7 +13,8 @@ import {
 import { useState } from "react";
 let emptyForm = { 
   userID:'',
-  email: ''
+  email: '',
+  name:''
 }
 export function NewStudent() {
   const navigate=useNavigate()
@@ -24,8 +25,17 @@ export function NewStudent() {
     }
     const handleSubmit= async (e)=>{
       e.preventDefault()
-
+      try {
+        await axios.post(`/api/student`, form, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+          })
+        console.log(form)
         navigate("/dashboard/home")
+    } catch(err) {
+        console.log(err.message)
+    }
     }
     
   return (
@@ -45,7 +55,7 @@ export function NewStudent() {
             
           </CardHeader>
           <CardBody className="flex flex-col gap-4">
-            <Input type="userID" label="userID" size="lg" id="userID"
+            <Input type="text" label="userID" size="lg" id="userID"
                     name="userID"
                     onChange={handleChange}
                     value={form.userID} />
@@ -53,6 +63,10 @@ export function NewStudent() {
                     name="email"
                     onChange={handleChange}
                     value={form.email} />
+           <Input type="text" label="name" size="lg" id="name"
+                    name="name"
+                    onChange={handleChange}
+                    value={form.name} />
             
           </CardBody>
           <CardFooter className="pt-0">

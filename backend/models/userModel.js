@@ -6,7 +6,7 @@ const userSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique: true
+        
     },
     password: {
         type: String, 
@@ -27,7 +27,11 @@ const userSchema = new Schema({
         type: mongoose.Types.ObjectId,
         // search for it in the allowStudent collection
         ref: 'allowStudent'
-     }]
+     }],
+     UserID:{
+        type:String,
+     }
+     
 })
 
 const User = mongoose.model('User', userSchema)
