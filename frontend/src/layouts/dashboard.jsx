@@ -7,13 +7,15 @@ import {
   Configurator,
   Footer,
 } from "@/widgets/layout";
+import { Home, Profile, Courses, Homework } from "@/pages/dashboard";
+
 import routes from "@/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 
 export function Dashboard({ setUser, loggedIn,role }) {
   const [controller, dispatch] = useMaterialTailwindController();
   const { sidenavType } = controller;
-
+  const pagesRoutes=[<Home role={role}/>,<Homework role={role}/>,<Courses role={role}/>,<Profile role={role}/>]
   return (
     <div className="min-h-screen bg-blue-gray-50/50">
       
@@ -40,17 +42,17 @@ export function Dashboard({ setUser, loggedIn,role }) {
           {routes.map(
             ({ layout, pages }) =>
               layout === "dashboard" &&
-              pages.map(({ path, element,name }) => (
+              pages.map(({ path ,name},index) => (
                  name!="dashboard" &&
-                <Route exact path={path} element={element} />
+                <Route exact path={path} element={pagesRoutes[index]} />
               ))
           )}
         </Routes>:<Routes>
           {routes.map(
             ({ layout, pages }) =>
               layout === "dashboard" &&
-              pages.map(({ path, element }) => (
-                <Route exact path={path} element={element} />
+              pages.map(({ path },index) => (
+                <Route exact path={path} element={pagesRoutes[index]} />
               ))
           )}
           
