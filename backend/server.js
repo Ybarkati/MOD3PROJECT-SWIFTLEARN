@@ -22,7 +22,7 @@ const commentRoutes = require('./routes/commentRoutes')
 const authRoutes = require('./routes/authRoutes')
 const userRoutes = require('./routes/userRoutes')
 const studentRoutes=require('./routes/studentRoutes')
-
+const emailRoutes=require("./routes/emailRoutes")
 const { authorize } = require('./middleware/authMiddleware')
 
 app.use(express.json())
@@ -32,6 +32,7 @@ app.use('/api/posts', postRoutes)
 app.use('/api/student', studentRoutes)
 app.use('/api/comments', authorize, commentRoutes)
 app.use('/api/users', authorize, userRoutes)
+app.use('/api/send-email', emailRoutes)
 app.use('/authU', authRoutes)
 
 

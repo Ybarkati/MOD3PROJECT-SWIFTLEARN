@@ -21,11 +21,23 @@ export function NewStudent() {
   let [form, setForm] = useState(emptyForm)
 
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value.toUpperCase() })
+        if (e.target.name=="userID"){
+            
+            setForm({ ...form, [e.target.name]: e.target.value.toUpperCase() })
+        }else{
+            setForm({ ...form, [e.target.name]: e.target.value })
+        }
     }
     const handleSubmit= async (e)=>{
       e.preventDefault()
-      try {
+    //   try {
+    //     await axios.post('/api/send-email', { email:form.email, message:form.userID });
+    //     console.log('Email sent successfully');
+    //   } catch (error) {
+    //     console.error('Error sending email', error);
+    //   }
+      try { 
+        await axios.post('/api/send-email', { email:form.email, message:form.userID });
         await axios.post(`/api/student`, form, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`
