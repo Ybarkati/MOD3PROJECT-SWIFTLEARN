@@ -36,7 +36,16 @@ export function Dashboard({ setUser, loggedIn,role }) {
         >
           <Cog6ToothIcon className="h-5 w-5" />
         </IconButton>
-        <Routes>
+        {role=="student"? <Routes>
+          {routes.map(
+            ({ layout, pages }) =>
+              layout === "dashboard" &&
+              pages.map(({ path, element,name }) => (
+                 name!="dashboard" &&
+                <Route exact path={path} element={element} />
+              ))
+          )}
+        </Routes>:<Routes>
           {routes.map(
             ({ layout, pages }) =>
               layout === "dashboard" &&
@@ -44,7 +53,9 @@ export function Dashboard({ setUser, loggedIn,role }) {
                 <Route exact path={path} element={element} />
               ))
           )}
-        </Routes>
+          
+        </Routes>}
+        
         
       </div>
     </div>
