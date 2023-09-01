@@ -21,18 +21,26 @@ module.exports.index = async (req, res) => {
 
 module.exports.delete = async (req, res) => {
     try {
-        await allowStudent.findOneAndDelete({ userID: req.params.id })
+        
+          await allowStudent.findOneAndDelete({ userID: req.params.id })
+        
+        
         const UserDelete = await User.findOneAndDelete({ userID: req.params.id })
         // find the post, storing it in a varaible, then deleting it
+        
+        if ( UserDelete!=null){
         const post = await Posts.deleteMany({  user: UserDelete.username })
         // deleting all comments where the comment id
-        await Comments.deleteMany({ _id: {
-            // matches any comment ids in the given array
-            $in: post.comments   
-        }})
+        if (post!=null){
+            await Comments.deleteMany({ _id: {
+                // matches any comment ids in the given array
+                $in: post.comments   
+            }})
+        }
+        }
         res.status(200).json({ message: 'successfully deleted' })
     } catch(err) {
-        console.log(err.message)
+        console.log(err.message,"herrrerer")
         res.status(400).json({ error: err.message })
     }
 }

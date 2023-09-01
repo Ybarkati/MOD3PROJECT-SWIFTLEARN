@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from '../../../api'
 import {
   Typography,
   Card,
@@ -11,9 +12,11 @@ import {
   MenuList,
   MenuItem,
   IconButton,
+  useAccordion,
+  
 
 } from "@material-tailwind/react";
-
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import {
   
   EllipsisVerticalIcon,
@@ -26,9 +29,39 @@ import {
   students,
   
 } from "@/data";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Student() {
+    
+    const [Students, setStudents] = useState([])
+
+    const navigate = useNavigate()
+
+    async function getStudents() {
+        try {
+            console.log('v1.00')
+            const response = await axios.get('/api/student')
+            setStudents(response.data)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        getStudents()
+    }, [])
+    async function handleDeleteStudent(id) {
+        try {
+            await axios.delete(`/api/student/${id}`, {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+              })
+            navigate('/dashboard/home')
+        } catch(err) {
+            console.log(err)
+        }
+    }
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
       
@@ -59,7 +92,7 @@ export function Student() {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["names", "email"].map(
+                {["names", "email","user-ID"].map(
                   (el) => (
                     <th
                       key={el}
@@ -77,8 +110,8 @@ export function Student() {
               </tr>
             </thead>
             <tbody>
-              {students.map(
-                ({ img, name, email }, key) => {
+              {Students.map(
+                ({ img,userID, name, email }, key) => {
                   const className = `py-3 px-5 ${
                     key === students.length - 1
                       ? ""
@@ -89,7 +122,7 @@ export function Student() {
                     <tr key={name}>
                       <td className={className}>
                         <div className="flex items-center gap-4">
-                          <Avatar src={img} alt={name} size="sm" />
+                          <Avatar src={`https://cdn2.iconfinder.com/data/icons/back-to-school-flat-1/64/14-Graduating_Student-512.png`} alt={name} size="sm" />
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -102,8 +135,21 @@ export function Student() {
                       <td className={className}>
                         {email}
                       </td>
+                      <td className={className}>
+                        <div className="flex">
+                        {userID}
+                        <button className="ml-2" onClick={() => {
+                              alert("copied")
+                              navigator.clipboard.writeText(userID);}}>
+                                <ContentCopyIcon/>
+                              
+                        </button>
+                        </div>
+                      </td>
                       <td className={className} >
-                        <Button color="red" variant="text">
+                        <Button color="red" variant="text" onClick={()=>{
+                            navigate(`/dashboard/home/${userID}`)
+                            handleDeleteStudent(userID)}}>
                           delete
                         </Button>
                       </td>
@@ -121,5 +167,4 @@ export function Student() {
     </div>
   );
 }
-
 export default Student;

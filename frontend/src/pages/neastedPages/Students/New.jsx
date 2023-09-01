@@ -58,7 +58,8 @@ export function NewStudent() {
             <Input type="text" label="userID" size="lg" id="userID"
                     name="userID"
                     onChange={handleChange}
-                    value={form.userID} />
+                    value={form.userID} 
+                    className="uppercase"/>
             <Input type="email" label="email" size="lg" id="email"
                     name="email"
                     onChange={handleChange}
