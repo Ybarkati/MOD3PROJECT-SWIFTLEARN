@@ -16,7 +16,7 @@ let emptyForm = {
   password: '',
   email: ''
 }
-export function SignIn() {
+export function SignIn({setUser}) {
   const navigate=useNavigate()
   let [form, setForm] = useState(emptyForm)
 
@@ -37,13 +37,13 @@ export function SignIn() {
     
             localStorage.setItem("token", token)
     
-            // const userResponse = await axios.get('/api/users', {
-            //     headers: {
-            //       Authorization: `Bearer ${localStorage.getItem('token')}`
-            //     }
-            //   })
+            const userResponse = await axios.get('/api/users', {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+              })
     
-            // setUser(userResponse.data)
+            setUser(userResponse.data)
     
             navigate('/dashboard/home')
 

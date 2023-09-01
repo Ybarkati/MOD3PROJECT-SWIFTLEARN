@@ -8,8 +8,11 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { useMaterialTailwindController, setOpenSidenav } from "@/context";
-
-export function Sidenav({ brandImg, brandName, routes }) {
+export function Sidenav({ brandImg, brandName, routes ,setUser, username}) {
+  const logout = () => {
+    localStorage.removeItem("token")
+    setUser({})
+  };
   const [controller, dispatch] = useMaterialTailwindController();
   const { sidenavColor, sidenavType, openSidenav } = controller;
   const sidenavTypes = {
@@ -50,7 +53,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
         </IconButton>
       </div>
       <div className="m-4">
-        {routes.filter(route => route.layout == "dashboard" || route.layout == "auth").map(({ layout, title, pages }, key) => (
+        {routes.filter(route => route.layout == "dashboard" || route.layout == "authLogout").map(({ layout, title, pages }, key) => (
           <ul key={key} className="mb-4 flex flex-col gap-1">
             {title && (
               <li className="mx-3.5 mt-4 mb-2">
@@ -65,9 +68,9 @@ export function Sidenav({ brandImg, brandName, routes }) {
             )}
             {pages.map(({ icon, name, path }) => (
               <li key={name}>
-                <NavLink to={`/${layout}${path.slice(0, -2)}`}>
+                <NavLink  to={`/${layout}${path.slice(0, -2)}`}>
                   {({ isActive }) => (
-                    <Button
+                    <Button onClick={name=="logout" &&  logout}
                       variant={isActive ? "gradient" : "text"}
                       color={
                         isActive

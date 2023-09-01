@@ -55,23 +55,35 @@ export const routes = [
       }
     ],
   },
-  // },
   {
     title: "auth pages",
     layout: "auth",
     pages: [
       {
         icon: <ArrowRightOnRectangleIcon {...icon} />,
-        name: "log out",
+        name: "sign in",
+        path: "/sign-in",
+        element: <SignIn />,
+      },
+      {
+        icon: <UserPlusIcon {...icon} />,
+        name: "sign up",
+        path: "/sign-up",
+        element: <SignUp />,
+      },
+    ],
+  },
+  {
+    title: "logout",
+    layout: "authLogout",
+    pages: [
+      {
+        icon: <ArrowRightOnRectangleIcon {...icon} />,
+        name: "logout",
         path: "/sign-in/*",
         element: <SignIn />,
       },
-  //     {
-  //       icon: <UserPlusIcon {...icon} />,
-  //       name: "sign up",
-  //       path: "/sign-up",
-  //       element: <SignUp />,
-  //     },
+      
     ],
   },
   {

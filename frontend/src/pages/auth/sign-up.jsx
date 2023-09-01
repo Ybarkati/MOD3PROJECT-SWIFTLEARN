@@ -22,7 +22,7 @@ let emptyForm = {
   role:'',
   userID:''
 }
-export function SignUp() {
+export function SignUp({setUser}) {
 
   const navigate = useNavigate()
 
@@ -49,13 +49,13 @@ export function SignUp() {
         console.log('ok',token)
         localStorage.setItem("token", token)
 
-        // const userResponse = await axios.get('/api/users', {
-        //     headers: {
-        //       Authorization: `Bearer ${localStorage.getItem('token')}`
-        //     }
-        //   })
+        const userResponse = await axios.get('/api/users', {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+          })
 
-        // setUser(userResponse.data)
+        setUser(userResponse.data)
         console.log('ok2')
         navigate('/dashboard/home')
 
