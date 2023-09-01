@@ -21,7 +21,7 @@ export function NewStudent() {
   let [form, setForm] = useState(emptyForm)
 
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value })
+        setForm({ ...form, [e.target.name]: e.target.value.toUpperCase() })
     }
     const handleSubmit= async (e)=>{
       e.preventDefault()
