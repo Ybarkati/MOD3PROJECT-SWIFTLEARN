@@ -7,7 +7,8 @@ async function show(req, res) {
         
         res.json({ 
             username: foundUser.username, 
-            email: foundUser.email 
+            email: foundUser.email ,
+            role:foundUser.role
         })
 
     } catch (error) {

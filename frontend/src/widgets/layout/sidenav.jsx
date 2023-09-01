@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { useMaterialTailwindController, setOpenSidenav } from "@/context";
-export function Sidenav({ brandImg, brandName, routes ,setUser, username}) {
+export function Sidenav({ brandImg, brandName, routes ,setUser, username,role}) {
   const logout = () => {
     localStorage.removeItem("token")
     setUser({})
@@ -66,7 +66,10 @@ export function Sidenav({ brandImg, brandName, routes ,setUser, username}) {
                 </Typography>
               </li>
             )}
-            {pages.map(({ icon, name, path }) => (
+            {console.log(role)}
+            {role=="student"? <>
+            {pages.filter(page => page.name!="dashboard"  ).map(({ icon, name, path }) => (
+              
               <li key={name}>
                 <NavLink  to={`/${layout}${path.slice(0, -2)}`}>
                   {({ isActive }) => (
@@ -94,6 +97,39 @@ export function Sidenav({ brandImg, brandName, routes ,setUser, username}) {
                 </NavLink>
               </li>
             ))}
+            </>:
+            <>
+            {pages.map(({ icon, name, path }) => (
+              
+              <li key={name}>
+                <NavLink  to={`/${layout}${path.slice(0, -2)}`}>
+                  {({ isActive }) => (
+                    <Button onClick={name=="logout" &&  logout}
+                      variant={isActive ? "gradient" : "text"}
+                      color={
+                        isActive
+                          ? sidenavColor
+                          : sidenavType === "dark"
+                          ? "white"
+                          : "blue-gray"
+                      }
+                      className="flex items-center gap-4 px-4 capitalize"
+                      fullWidth
+                    >
+                      {icon}
+                      <Typography
+                        color="inherit"
+                        className="font-medium capitalize"
+                      >
+                        {name}
+                      </Typography>
+                    </Button>
+                  )}
+                </NavLink>
+              </li>
+            ))}
+            </>}
+            
           </ul>
         ))}
       </div>

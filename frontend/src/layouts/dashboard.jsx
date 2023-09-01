@@ -10,14 +10,15 @@ import {
 import routes from "@/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 
-export function Dashboard({ setUser, loggedIn }) {
+export function Dashboard({ setUser, loggedIn,role }) {
   const [controller, dispatch] = useMaterialTailwindController();
   const { sidenavType } = controller;
 
   return (
     <div className="min-h-screen bg-blue-gray-50/50">
+      
       <Sidenav
-      username={loggedIn} setUser={setUser}
+      username={loggedIn} role={role} setUser={setUser}
         routes={routes}
         brandImg={
           sidenavType === "dark" ? "/img/logo-ct.png" : "/img/logo-ct-dark.png"

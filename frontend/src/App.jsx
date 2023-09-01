@@ -47,10 +47,11 @@ function App() {
 
 }, [])
   let loggedIn = user.username
+  let UserRole=user.role
   return (
     <Routes>
       {loggedIn? <>
-        <Route path="/dashboard/*" element={<Dashboard user={loggedIn} setUser={setUser}/>} />
+        <Route path="/dashboard/*" element={<Dashboard user={loggedIn} role={UserRole} setUser={setUser}/>} />
 
       </>:<>
       <Route path="/auth/*" element={<Auth setUser={setUser} />} />
