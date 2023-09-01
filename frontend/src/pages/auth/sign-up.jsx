@@ -37,7 +37,10 @@ export function SignUp({setUser}) {
   };
   const handleSubmit = async (e) => {
     e.preventDefault()
-
+    if (form.role=="student" && form.userID==""){
+        return alert("each student must have an userID")
+    }
+  
     try {
         const authResponse = await axios.post('/authU/register', form)
         const token = authResponse.data.token

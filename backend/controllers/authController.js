@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const User = require('../models/userModel')
+const allowStudent = require('../models/allowStudent')
 
 function generateToken(user) {
     const payload = { id: user._id, username: user.username }
@@ -20,7 +21,13 @@ async function register(req, res) {
         if (foundUser) {
             return res.status(400).json({ error: 'User already exists' })
         }
-
+        if (req.body.role=="student"){
+            
+        const IsAllowed=await allowStudent.findOne({userID:req.body.userID})
+        if (!IsAllowed){
+            return res.status(400).json({ error: 'Student not allowed' })
+        }
+    }
     // 2. If they don't exist, encrypt their password
 
         const encryptedPassword = await bcrypt.hash(req.body.password, Number(process.env.SALT_ROUNDS))
