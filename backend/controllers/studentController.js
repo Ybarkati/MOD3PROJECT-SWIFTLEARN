@@ -11,7 +11,8 @@ const User = require('../models/userModel')
 
 module.exports.index = async (req, res) => {
     try {
-        const allowStudents = await allowStudent.find().sort({ createdAt: 1 })
+        console.log(req.username)
+        const allowStudents = await allowStudent.find({user:req.username}).sort({ createdAt: 1 })
         res.status(200).json(allowStudents)
     } catch(err) {
         console.log(err.message)

@@ -10,7 +10,7 @@ const { authorize } = require('../middleware/authMiddleware')
 
 
 // index
-router.get('/', studentControl.index)
+router.get('/', authorize,studentControl.index)
 
 // delete
 router.delete('/:id', authorize, studentControl.delete)

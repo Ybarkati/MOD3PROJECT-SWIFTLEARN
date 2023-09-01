@@ -40,7 +40,11 @@ export function Student() {
     async function getStudents() {
         try {
             console.log('v1.00')
-            const response = await axios.get('/api/student')
+            const response = await axios.get('/api/student', {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+              })
             setStudents(response.data)
         } catch(err) {
             console.log(err)
