@@ -20,7 +20,7 @@ import axios from '../../../api'
 
 export function HomeworkIndex({ role }) {
   const navigate = useNavigate();
-  const [posts, setPosts] = useState([])
+  const [homework, setHomework] = useState([])
   async function getPosts() {
     try {
         console.log('v1.00')
@@ -29,7 +29,7 @@ export function HomeworkIndex({ role }) {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
         })
-        setPosts(response.data)
+        setHomework(response.data)
         console.log(response.data)
     } catch(err) {
         console.log(err)
@@ -110,7 +110,7 @@ useEffect(() => {
               </tr>
             </thead>
             <tbody>
-              {homework.map(({ img, name, email, job, online, date }, key) => {
+              {homework.map(({ Published,due,title,_id }, key) => {
                 const className = `py-3 px-5 ${
                   key === homework.length - 1
                     ? ""
@@ -118,7 +118,7 @@ useEffect(() => {
                 }`;
 
                 return (
-                  <tr key={name}>
+                  <tr key={title}>
                     <td className={className}>
                       <div className="flex items-center gap-4">
                         <Avatar src={`https://cdn-icons-png.flaticon.com/512/5058/5058507.png`} alt={name} size="sm" />
@@ -128,17 +128,18 @@ useEffect(() => {
                             color="blue-gray"
                             className="font-semibold "
                           >
-                            {name}
+                            {title}
                           </Typography>
                         </div>
                       </div>
                     </td>
                     {role != "student" && (
                       <td className={className}>
+                        {console.log(Published)}
                         <Chip
                           variant="gradient"
-                          color={online ? "green" : "blue-gray"}
-                          value={online ? "published" : "unpublished"}
+                          color={Published=="true" ? "green" : "blue-gray"}
+                          value={Published=="true" ? "published" : "unpublished"}
                           className="py-0.5 px-2 w-24 text-[11px] text-center font-medium"
                         />
                       </td>
@@ -146,12 +147,12 @@ useEffect(() => {
 
                     <td className={className}>
                       <Typography className="text-xs font-semibold text-blue-gray-600">
-                        {date}
+                        {due}
                       </Typography>
                     </td>
                     <td className={className}>
                       <Typography className="text-xs font-semibold text-blue-gray-600">
-                        <Link to={`${name}`}>
+                        <Link to={`${_id}`}>
                           <Button variant="text" color="blue">
                             More ...
                           </Button>
