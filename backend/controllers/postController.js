@@ -3,6 +3,8 @@ const Comments = require('../models/commentModel')
 const Users = require('../models/commentModel')
 // const users = require('../models/users')
 const posts = require('../models/posts')
+const allowStudent = require('../models/allowStudent')
+const User = require('../models/userModel')
 
 
 module.exports.seed = async (req, res) => {
@@ -19,13 +21,29 @@ module.exports.seed = async (req, res) => {
 }
 
 module.exports.index = async (req, res) => {
-    try {
-        const posts = await Posts.find().sort({ createdAt: 1 })
-        res.status(200).json(posts)
-    } catch(err) {
-        console.log(err.message)
-        res.status(400).json({ error: err.message })
+    const currentUser=await User.find({username:req.username})
+    if (currentUser[0].role=="student"){
+        
+        try {
+            
+            const teacher=await allowStudent.find({code:currentUser[0].code})
+            const posts = await Posts.find({user:teacher[0].user}).sort({ createdAt: 1 })
+            res.status(200).json(posts)
+        } catch(err) {
+            console.log(err.message)
+            res.status(400).json({ error: err.message })
+        }
+
+    }else{
+        try {
+            const posts = await Posts.find({user:req.username}).sort({ createdAt: 1 })
+            res.status(200).json(posts)
+        } catch(err) {
+            console.log(err.message)
+            res.status(400).json({ error: err.message })
+        }
     }
+    
 }
 
 module.exports.delete = async (req, res) => {

@@ -20,7 +20,7 @@ let emptyForm = {
   password: '',
   email: '',
   role:'',
-  userID:''
+  code:''
 }
 export function SignUp({setUser}) {
 
@@ -33,12 +33,12 @@ export function SignUp({setUser}) {
         
     }
   const handleSelectChange = (event) => {
-    setForm({ ...form, role: event,userID:"" })
+    setForm({ ...form, role: event,code:"" })
   };
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (form.role=="student" && form.userID==""){
-        return alert("each student must have an userID")
+    if (form.role=="student" && form.code==""){
+        return alert("each student must have an code")
     }
   
     try {
@@ -111,10 +111,10 @@ export function SignUp({setUser}) {
               </Select> 
             </div>
             {form.role=="student" && <Input label="Your Id Number" size="lg"   type="text" 
-                    id="userID"
-                    name="userID"
+                    id="code"
+                    name="code"
                     onChange={handleChange}
-                    value={form.userID}/> }  
+                    value={form.code}/> }  
             <div className="-ml-2.5">
               <Checkbox label="I agree the Terms and Conditions" />
             </div>

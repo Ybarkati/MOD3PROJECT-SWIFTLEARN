@@ -34,7 +34,8 @@ function authorize(req, res, next) {
 
         req.id = payload.id 
         req.username = payload.username
-
+        req.role=payload.role
+        req.code=payload.code
         // 4. Move on to the requested route (next)
 
         next()

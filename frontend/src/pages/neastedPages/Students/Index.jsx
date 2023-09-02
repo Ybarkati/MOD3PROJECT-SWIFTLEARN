@@ -115,7 +115,7 @@ export function Student() {
             </thead>
             <tbody>
               {Students.map(
-                ({ img,userID, name, email }, key) => {
+                ({ img,code, name, email }, key) => {
                   const className = `py-3 px-5 ${
                     key === students.length - 1
                       ? ""
@@ -141,10 +141,10 @@ export function Student() {
                       </td>
                       <td className={className}>
                         <div className="flex">
-                        {userID}
+                        {code}
                         <button className="ml-2" onClick={() => {
                               alert("copied")
-                              navigator.clipboard.writeText(userID);}}>
+                              navigator.clipboard.writeText(code);}}>
                                 <ContentCopyIcon/>
                               
                         </button>
@@ -152,8 +152,8 @@ export function Student() {
                       </td>
                       <td className={className} >
                         <Button color="red" variant="text" onClick={()=>{
-                            navigate(`/dashboard/home/${userID}`)
-                            handleDeleteStudent(userID)}}>
+                            navigate(`/dashboard/home/${code}`)
+                            handleDeleteStudent(code)}}>
                           delete
                         </Button>
                       </td>

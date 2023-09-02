@@ -22,15 +22,16 @@ const userSchema = new Schema({
         enum:["teacher","student"],
         default:"student"
     },
+    code:{
+        type:String,
+     },
     allowStudent: [{
         // an id referencing the allowStudent document
         type: mongoose.Types.ObjectId,
         // search for it in the allowStudent collection
         ref: 'allowStudent'
      }],
-     UserID:{
-        type:String,
-     }
+     
      
 })
 

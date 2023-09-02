@@ -12,7 +12,7 @@ import {
 } from "@material-tailwind/react";
 import { useState } from "react";
 let emptyForm = { 
-  userID:'',
+  code:'',
   email: '',
   name:''
 }
@@ -21,7 +21,7 @@ export function NewStudent() {
   let [form, setForm] = useState(emptyForm)
 
     const handleChange = (e) => {
-        if (e.target.name=="userID"){
+        if (e.target.name=="code"){
             
             setForm({ ...form, [e.target.name]: e.target.value.toUpperCase() })
         }else{
@@ -31,13 +31,13 @@ export function NewStudent() {
     const handleSubmit= async (e)=>{
       e.preventDefault()
     //   try {
-    //     await axios.post('/api/send-email', { email:form.email, message:form.userID });
+    //     await axios.post('/api/send-email', { email:form.email, message:form.code });
     //     console.log('Email sent successfully');
     //   } catch (error) {
     //     console.error('Error sending email', error);
     //   }
       try { 
-        await axios.post('/api/send-email', { email:form.email, message:form.userID });
+        await axios.post('/api/send-email', { email:form.email, message:form.code });
         await axios.post(`/api/student`, form, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -67,10 +67,10 @@ export function NewStudent() {
             
           </CardHeader>
           <CardBody className="flex flex-col gap-4">
-            <Input type="text" label="userID" size="lg" id="userID"
-                    name="userID"
+            <Input type="text" label="code" size="lg" id="code"
+                    name="code"
                     onChange={handleChange}
-                    value={form.userID} 
+                    value={form.code} 
                     className="uppercase"/>
             <Input type="email" label="email" size="lg" id="email"
                     name="email"

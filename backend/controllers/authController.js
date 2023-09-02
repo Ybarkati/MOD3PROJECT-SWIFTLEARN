@@ -23,19 +23,17 @@ async function register(req, res) {
         }
         if (req.body.role=="student"){
             
-        const IsAllowed=await allowStudent.findOne({userID:req.body.userID})
+        const IsAllowed=await allowStudent.findOne({code:req.body.code})
         if (!IsAllowed){
             return res.status(400).json({ error: 'Student not allowed' })
         }
     }
     // 2. If they don't exist, encrypt their password
-
         const encryptedPassword = await bcrypt.hash(req.body.password, Number(process.env.SALT_ROUNDS))
 
     // 3. Add new user to the database with encrypted password
 
-        const newUser = await User.create({ ...req.body, password: encryptedPassword })
-
+        const newUser = await User.create({ ...req.body, password: encryptedPassword,code:req.body.code })
     // 4. Generate a JWT token and returning it to user (Give them keys!) (Sign a permission slip and give it to them)
 
         const token = generateToken(newUser)

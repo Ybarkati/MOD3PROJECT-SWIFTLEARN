@@ -23,10 +23,10 @@ module.exports.index = async (req, res) => {
 module.exports.delete = async (req, res) => {
     try {
         
-          await allowStudent.findOneAndDelete({ userID: req.params.id })
+          await allowStudent.findOneAndDelete({ code: req.params.id })
         
         
-        const UserDelete = await User.findOneAndDelete({ userID: req.params.id })
+        const UserDelete = await User.findOneAndDelete({ code: req.params.id })
         // find the post, storing it in a varaible, then deleting it
         
         if ( UserDelete!=null){
@@ -49,13 +49,17 @@ module.exports.delete = async (req, res) => {
 
 
 module.exports.create = async (req, res) => {
-    console.log(req.body)
+    console.log(req.body,req.username,"hene-------")
     try {
         const post = await allowStudent.create({ ...req.body, user: req.username })
+        console.log(post,"crevri----------------")
         res.status(200).json(post)
     } catch(err) {
+        console.log("-----------------")
         console.log(err.message)
         res.status(400).json({ error: err.message })
+        console.log("-----------------")
+
     }
 }
 
