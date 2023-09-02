@@ -27,7 +27,7 @@ module.exports.index = async (req, res) => {
         try {
             
             const teacher=await allowStudent.find({code:currentUser[0].code})
-            const posts = await Posts.find({user:teacher[0].user}).sort({ createdAt: 1 })
+            const posts = await Posts.find({user:teacher[0].user,Published:"true"}).sort({ createdAt: 1 })
             res.status(200).json(posts)
         } catch(err) {
             console.log(err.message)
