@@ -3,8 +3,31 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const postSchema = new Schema({
-   subject: { type: String },
-   body: { type: String },
+   // homeworkId:submit,
+   // ableDownload:isChecked,
+   // Published:isPublished,
+   // due:date,
+   // title:titleValue,
+   homeworkId: { 
+      type: String, 
+      required: true 
+   },
+   ableDownload: { 
+      type: String, 
+      default:false 
+   },
+   Published: { 
+      type: String, 
+      default:false 
+   },
+   due: { 
+      type: String, 
+       
+   },
+   title: { 
+      type: String, 
+      required: true ,
+   },
    user: { 
       type: String, 
       required: true 

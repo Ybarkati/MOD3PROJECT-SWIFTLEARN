@@ -9,8 +9,9 @@ import {
   Input,
   Form
 } from "@material-tailwind/react";
+import axios from '../../../api'
+
 import { homework } from "@/data";
-import Datepicker from "react-tailwindcss-datepicker";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -45,7 +46,7 @@ export function NewHomework() {
     setIsPublished(!isPublished);
   };
   const navigate = useNavigate();
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = async (e) => {
     e.preventDefault();
     let homeworkForm={
       homeworkId:submit,
@@ -55,6 +56,17 @@ export function NewHomework() {
       title:titleValue,
     }
     console.log(homeworkForm)
+    try {
+      
+      await axios.post(`/api/posts`, homeworkForm, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        })
+      navigate(`/dashboard/homework`)
+  } catch(err) {
+      console.log(err.message)
+  }
   };
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
