@@ -12,10 +12,10 @@ import { Home, Profile, Courses, Homework } from "@/pages/dashboard";
 import routes from "@/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 
-export function Dashboard({ setUser, loggedIn,role }) {
+export function Dashboard({ setUser, loggedIn,role,user }) {
   const [controller, dispatch] = useMaterialTailwindController();
   const { sidenavType } = controller;
-  const pagesRoutes=[<Home role={role}/>,<Homework role={role}/>,<Courses role={role}/>,<Profile role={role}/>]
+  const pagesRoutes=[<Home role={role}/>,<Homework user={user} role={role}/>,<Courses role={role}/>,<Profile role={role}/>]
   return (
     <div className="min-h-screen bg-blue-gray-50/50">
       

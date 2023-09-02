@@ -7,8 +7,8 @@ import HomeworkIndex from "../neastedPages/Homework/Index";
 import NewHomework from "../neastedPages/Homework/New";
 import HomeworkEdit from "../neastedPages/Homework/Edit";
 import ShowHomework from "../neastedPages/Homework/Show";
-export function Homework({role}) {
-  const pagesRoutes=[<HomeworkIndex role={role}/>,<NewHomework role={role}/>,<HomeworkEdit role={role}/>,<ShowHomework role={role}/>]
+export function Homework({role,user}) {
+  const pagesRoutes=[<HomeworkIndex role={role}/>,<NewHomework role={role}/>,<HomeworkEdit user={user} role={role}/>,<ShowHomework role={role}/>]
   return (
     
     <Routes>
