@@ -2,9 +2,9 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const postSchema = new Schema({
+const courseSchema = new Schema({
 
-   homeworkId: { 
+   courseId: { 
       type: String, 
       required: true 
    },
@@ -16,10 +16,6 @@ const postSchema = new Schema({
       type: String, 
       default:false 
    },
-   due: { 
-      type: String, 
-       
-   },
    title: { 
       type: String, 
       required: true ,
@@ -28,15 +24,9 @@ const postSchema = new Schema({
       type: String, 
       required: true 
    },
-   // comments field here
-   comments: [{
-      // an id referencing the comment document
-      type: mongoose.Types.ObjectId,
-      // search for it in the comments collection
-      ref: 'comments'
-   }]
+   
 }, { timestamps: true })
 
-const Post = mongoose.model('posts', postSchema)
+const Courses = mongoose.model('courses', courseSchema)
 
-module.exports = Post
+module.exports = Courses
