@@ -63,7 +63,7 @@ export function NewCourses() {
       <Card>
         <CardHeader variant="gradient" color="blue" className="mb-8 p-6">
           <Typography variant="h6" color="white" className="flex w-full ">
-            <Link to="/dashboard/homework">
+            <Link to="/dashboard/courses">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

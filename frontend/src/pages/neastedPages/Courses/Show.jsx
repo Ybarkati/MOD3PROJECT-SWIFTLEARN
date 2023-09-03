@@ -48,21 +48,6 @@ export function Show({ role }) {
   useEffect(() => {
     getCourse();
   }, []);
-
-  const comments = [
-    {
-      name: "yassine",
-      link: `https://drive.google.com/file/d/12VvaaPIa703JGVlTZ2P99Wf1s3ocJThW/view?usp=sharing`
-    },
-    {
-      name: "yassine",
-      link: `https://drive.google.com/file/d/12VvaaPIa703JGVlTZ2P99Wf1s3ocJThW/view?usp=sharing`
-    },
-    {
-      name: "yassine",
-      link: `https://drive.google.com/file/d/12VvaaPIa703JGVlTZ2P99Wf1s3ocJThW/view?usp=sharing`
-    }
-  ];
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
       <Card>
