@@ -121,7 +121,7 @@ useEffect(() => {
                   <tr key={title}>
                     <td className={className}>
                       <div className="flex items-center gap-4">
-                        <Avatar src={`https://cdn-icons-png.flaticon.com/512/5058/5058507.png`} alt={name} size="sm" />
+                        <Avatar src={`https://pnghq.com/wp-content/uploads/graduate-icon-png-full-hd-77725.png`} alt={name} size="sm" />
                         <div>
                           <Typography
                             variant="small"
