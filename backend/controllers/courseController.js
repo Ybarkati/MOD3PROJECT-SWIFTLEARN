@@ -81,7 +81,7 @@ module.exports.show = async (req, res) => {
     console.log('Show:')
     try {
         // populate replaces the ids with actual documents/objects we can use
-        const course = await Courses.findById(req.params.id).populate('comments')
+        const course = await Courses.findById(req.params.id)
         console.log(course)
         res.status(200).json(course)
     } catch(err) {
