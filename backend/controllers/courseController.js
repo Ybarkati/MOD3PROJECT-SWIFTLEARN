@@ -17,7 +17,7 @@ module.exports.index = async (req, res) => {
         try {
             
             const teacher=await allowStudent.find({code:currentUser[0].code})
-            const course = await Courses.find({user:teacher[0].user,Published:"true"}).sort({ createdAt: 1 })
+            const course = await Courses.find({user:teacher[0].user,Published:"true"}).sort({ createdAt: -1 })
             res.status(200).json(course)
         } catch(err) {
             console.log(err.message)
@@ -26,7 +26,7 @@ module.exports.index = async (req, res) => {
 
     }else{
         try {
-            const course = await Courses.find({user:req.username}).sort({ createdAt: 1 })
+            const course = await Courses.find({user:req.username}).sort({ createdAt: -1 })
             res.status(200).json(course)
         } catch(err) {
             console.log(err.message)
