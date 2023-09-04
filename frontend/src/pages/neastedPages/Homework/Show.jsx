@@ -3,9 +3,15 @@ import {
   CardHeader,
   CardBody,
   Typography,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  IconButton,
+  Button
 } from "@material-tailwind/react";
 import axios from "../../../api";
-
+import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLayoutEffect } from "react";
@@ -35,14 +41,14 @@ export function ShowHomework({ role }) {
   }
   async function handleDeleteHomework() {
     try {
-        await axios.delete(`/api/posts/${id}`, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-          })
-        navigate('/dashboard/homework')
-    } catch(err) {
-        console.log(err)
+      await axios.delete(`/api/posts/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+      navigate("/dashboard/homework");
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -126,28 +132,63 @@ export function ShowHomework({ role }) {
             <div className="">
               {comments.map((element) => {
                 return (
-                  <a
-                    href={element.link}
-                    target="_blank"
-                    className="inline-flex ml-4 mr-4  mb-4 items-center justify-center p-5 text-base font-medium text-gray-500 rounded-lg bg-gray-50 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
-                  >
-                    <span className="w-full">Homework for {element.name}</span>
-                    <svg
-                      className="w-4 h-4 ml-2"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 14 10"
+                  <div className="inline-flex ml-4 mr-4  mb-4 items-center justify-center p-5 text-base font-medium text-gray-800 rounded-lg bg-green-50 hover:text-gray-900 hover:bg-green-100 dark:text-gray-400 dark:bg-green-800 dark:hover:bg-green-700 dark:hover:text-white">
+                    <Menu placement="left-start">
+                      <MenuHandler>
+                        <IconButton size="sm" variant="text" color="blue-gray">
+                          <EllipsisVerticalIcon
+                            strokeWidth={3}
+                            fill="currenColor"
+                            className="h-6 w-6 text-black"
+                          />
+                        </IconButton>
+                      </MenuHandler>
+                      <MenuList>
+                        <MenuItem className="hover:bg-green-100">
+                          {" "}
+                          <button
+                            onClick={() => alert("ok")}
+                            className="w-full"
+                          >
+                            START AGAIN
+                          </button>
+                        </MenuItem>
+                        <MenuItem className="hover:bg-red-100">
+                          {" "}
+                          <button
+                            onClick={() => alert("ok")}
+                            className="w-full "
+                          >
+                            DELETE
+                          </button>
+                        </MenuItem>
+                      </MenuList>
+                    </Menu>
+                    <a
+                      href={element.link}
+                      target="_blank"
+                      className="inline-flex "
                     >
-                      <path
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M1 5h12m0 0L9 1m4 4L9 9"
-                      />
-                    </svg>
-                  </a>
+                      <span className="w-full">
+                        Homework for {element.name}
+                      </span>
+                      <svg
+                        className="w-4 h-4 ml-4 mt-1"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 14 10"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M1 5h12m0 0L9 1m4 4L9 9"
+                        />
+                      </svg>
+                    </a>
+                  </div>
                 );
               })}
             </div>
