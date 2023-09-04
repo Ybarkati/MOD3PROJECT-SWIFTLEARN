@@ -8,6 +8,15 @@ const commentSchema = new Schema({
       type: String, 
       required: true
    },
+   done:{
+      type:Boolean
+   },
+   grade:{
+      type:String
+   },
+   feedback:{
+      type:String
+   }
    // Optional second reference:
 //    post: { type: mongoose.Types.ObjectId, ref: 'posts' }
 }, { timestamps: true })

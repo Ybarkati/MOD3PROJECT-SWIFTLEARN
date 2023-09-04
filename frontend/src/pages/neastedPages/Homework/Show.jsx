@@ -13,15 +13,18 @@ import {
 import axios from "../../../api";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLayoutEffect } from "react";
+import { element } from "prop-types";
 
-export function ShowHomework({ role }) {
+export function ShowHomework({ role,user }) {
   const params = useParams();
+  const detailsRef = useRef()
+  const textRef = useRef()
 
   const [homework, setHomework] = useState({});
 
-  const [isChecked, setIsChecked] = useState(false);
+  const [defaultInput, setDefaultInput] = useState({});
   const navigate = useNavigate();
   useLayoutEffect(() => {
     if (params.id == "newhomecreate") {
@@ -51,25 +54,73 @@ export function ShowHomework({ role }) {
       console.log(err);
     }
   }
+  
 
   useEffect(() => {
     getHomework();
   }, []);
 
-  const comments = [
-    {
-      name: "yassine",
-      link: `https://drive.google.com/file/d/12VvaaPIa703JGVlTZ2P99Wf1s3ocJThW/view?usp=sharing`
-    },
-    {
-      name: "yassine",
-      link: `https://drive.google.com/file/d/12VvaaPIa703JGVlTZ2P99Wf1s3ocJThW/view?usp=sharing`
-    },
-    {
-      name: "yassine",
-      link: `https://drive.google.com/file/d/12VvaaPIa703JGVlTZ2P99Wf1s3ocJThW/view?usp=sharing`
+  async function handleDeleteAnswer(commentId) {
+    try {
+        await axios.delete(`/api/comments/${id}/${commentId}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        let updatedPost = { ...homework }
+        updatedPost.comments = updatedPost.comments.filter(c => c._id !== commentId)
+        setHomework(updatedPost)
+        setIsDone(false)
+    } catch(err) {
+        console.log(err)
     }
-  ];
+}
+async function handleUpdateAnswer(commentId) {
+  try {
+      await axios.delete(`/api/comments/${id}/${commentId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+      })
+      let updatedPost = { ...homework }
+      const defaultValue={
+        textValue:updatedPost.comments.filter(c => c._id == commentId)[0].text,
+        detailsOpen:true
+      }
+      // textRef.current.value = updatedPost.comments.filter(c => c._id == commentId)
+      // detailsRef.current.open = true
+      setDefaultInput(defaultValue)
+      updatedPost.comments = updatedPost.comments.filter(c => c._id !== commentId)
+      setHomework(updatedPost)
+      
+     
+
+  } catch(err) {
+      console.log(err)
+  }
+}
+  async function handleSubmit(e) {
+    e.preventDefault()
+   setDefaultInput({})
+    const comment = {
+        text: textRef.current.value,
+        done:true
+    }
+    const response = await axios.post(`/api/comments/${id}`, comment, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+    
+    const updatedPost = { ...homework }
+    updatedPost.comments.push(response.data)
+    setHomework(updatedPost)
+    console.log(updatedPost)
+
+    textRef.current.value = ''
+    detailsRef.current.open = false
+    
+}
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
       <Card>
@@ -130,7 +181,9 @@ export function ShowHomework({ role }) {
               )}
             </div>
             <div className="">
-              {comments.map((element) => {
+              { homework?.comments && role=="student" &&
+              <>
+              {homework.comments.filter((element)=>element.user==user).map((element) => {
                 return (
                   <div className="inline-flex ml-4 mr-4  mb-4 items-center justify-center p-5 text-base font-medium text-gray-800 rounded-lg bg-green-50 hover:text-gray-900 hover:bg-green-100 dark:text-gray-400 dark:bg-green-800 dark:hover:bg-green-700 dark:hover:text-white">
                     <Menu placement="left-start">
@@ -147,7 +200,7 @@ export function ShowHomework({ role }) {
                         <MenuItem className="hover:bg-green-100">
                           {" "}
                           <button
-                            onClick={() => alert("ok")}
+                            onClick={() => handleUpdateAnswer(element._id)}
                             className="w-full"
                           >
                             START AGAIN
@@ -156,7 +209,7 @@ export function ShowHomework({ role }) {
                         <MenuItem className="hover:bg-red-100">
                           {" "}
                           <button
-                            onClick={() => alert("ok")}
+                            onClick={()=>handleDeleteAnswer(element._id)}
                             className="w-full "
                           >
                             DELETE
@@ -165,12 +218,12 @@ export function ShowHomework({ role }) {
                       </MenuList>
                     </Menu>
                     <a
-                      href={element.link}
+                      href={element.text}
                       target="_blank"
                       className="inline-flex "
                     >
                       <span className="w-full">
-                        Homework for {element.name}
+                        Check your answer 
                       </span>
                       <svg
                         className="w-4 h-4 ml-4 mt-1"
@@ -191,8 +244,14 @@ export function ShowHomework({ role }) {
                   </div>
                 );
               })}
+              </>
+            }
             </div>
-            <details className="group w-[300px] self-center">
+            {/* {console.log(homework.comments.filter((element=>{ return element.user==user && element.done==true })))} */}
+            {role=="student" && homework?.comments   &&
+            <>
+              {homework.comments.filter((element=>{ return element.user==user && element.done==true })).length==0 &&
+            <details open={defaultInput.detailsOpen } ref={detailsRef} className="group w-[300px] self-center">
               <summary className="flex justify-between items-center font-medium cursor-pointer list-none">
                 <span> Submit Your homework here</span>
                 <span className="transition group-open:rotate-180">
@@ -214,6 +273,8 @@ export function ShowHomework({ role }) {
               <div className="w-70 mt-6 flex">
                 <div className="relative w-full min-w-[200px]">
                   <textarea
+                    defaultValue={defaultInput.textValue}
+                    ref={textRef}
                     className="peer h-full min-h-[100px] w-full resize-none rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:resize-none disabled:border-0 disabled:bg-blue-gray-50"
                     placeholder=" "
                   ></textarea>
@@ -222,6 +283,7 @@ export function ShowHomework({ role }) {
                   </label>
                 </div>
                 <button
+                onClick={handleSubmit}
                   type="submit"
                   class="inline-flex justify-center ml-1 h-fit align-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
                 >
@@ -238,6 +300,9 @@ export function ShowHomework({ role }) {
                 </button>
               </div>
             </details>
+}
+            </>
+          } 
           </div>
         </CardBody>
       </Card>
