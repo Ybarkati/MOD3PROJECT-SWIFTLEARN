@@ -246,6 +246,61 @@ async function handleUpdateAnswer(commentId) {
               })}
               </>
             }
+            {homework?.comments && role=="teacher" && <>
+            {homework.comments.map((element) => {
+                return (
+                  <div className="inline-flex ml-4 mr-4  mb-4 items-center justify-center p-5 text-base font-medium text-gray-800 rounded-lg bg-green-50 hover:text-gray-900 hover:bg-green-100 dark:text-gray-400 dark:bg-green-800 dark:hover:bg-green-700 dark:hover:text-white">
+                    <Menu placement="left-start">
+                      <MenuHandler>
+                        <IconButton size="sm" variant="text" color="blue-gray">
+                          <EllipsisVerticalIcon
+                            strokeWidth={3}
+                            fill="currenColor"
+                            className="h-6 w-6 text-black"
+                          />
+                        </IconButton>
+                      </MenuHandler>
+                      <MenuList>
+                        <MenuItem className="hover:bg-blue-100">
+                          {" "}
+                          <button
+                            onClick={() => navigate()}
+                            className="w-full"
+                          >
+                            GIVE GRADE
+                          </button>
+                        </MenuItem>
+                        
+                      </MenuList>
+                    </Menu>
+                    <a
+                      href={element.text}
+                      target="_blank"
+                      className="inline-flex "
+                    >
+                      <span className="w-full">
+                        Homework done by {element.user} <br/> At {new Date(element.createdAt).toLocaleString()}
+                      </span>
+                      <svg
+                        className="w-4 h-4 ml-4 mt-1"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 14 10"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M1 5h12m0 0L9 1m4 4L9 9"
+                        />
+                      </svg>
+                    </a>
+                  </div>
+                );
+              })}
+            </>}
             </div>
             {/* {console.log(homework.comments.filter((element=>{ return element.user==user && element.done==true })))} */}
             {role=="student" && homework?.comments   &&
