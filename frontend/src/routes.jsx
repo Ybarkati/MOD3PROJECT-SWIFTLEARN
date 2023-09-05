@@ -19,6 +19,7 @@ import HomeworkEdit from "./pages/neastedPages/Homework/Edit";
 import ShowHomework from "./pages/neastedPages/Homework/Show";
 import NewStudent from "./pages/neastedPages/Students/New";
 import Student from "./pages/neastedPages/Students/Index";
+import EditAnswer from "./pages/neastedPages/Homework/EditAnswer";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -156,11 +157,15 @@ export const routes = [
         },
         element: <NewHomework />,
       },
-      // {
-      //   name: "comments",
-      //   path: "/comments/:id/edit",
-      //   element: <NewCourses />,
-      // },
+      {
+        name: "answer",
+        path: "/:id/answer/:idd/edit",
+        isAllow:{
+          student:false,
+          teacher:true
+        },
+        element: <EditAnswer />,
+      },
       {
         name: "edit",
         path: "/:id/edit",

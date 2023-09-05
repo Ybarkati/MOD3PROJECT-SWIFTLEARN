@@ -55,7 +55,7 @@ module.exports.show = async (req, res) => {
     console.log('GET /comments/:id')
     try {
         console.log(req.params)
-        const comment = await Comments.findOne({ _id: req.params.commentId, user: req.username })
+        const comment = await Comments.findOne({ _id: req.params.commentId})
    
         if (!comment) {
             throw new Error('Access denied')
@@ -71,7 +71,7 @@ module.exports.show = async (req, res) => {
 module.exports.update = async (req, res) => {
     // update a comment by updating an item in the comments property in post
     try {
-        const comment = await Comments.findOneAndUpdate({ _id: req.params.commentId, user: req.username }, req.body)
+        const comment = await Comments.findOneAndUpdate({ _id: req.params.commentId }, req.body)
   
         if (!comment) {
             throw new Error('Access denied')

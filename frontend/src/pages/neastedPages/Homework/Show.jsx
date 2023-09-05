@@ -264,7 +264,7 @@ async function handleUpdateAnswer(commentId) {
                         <MenuItem className="hover:bg-blue-100">
                           {" "}
                           <button
-                            onClick={() => navigate()}
+                            onClick={() => navigate(`answer/${element._id}/edit`)}
                             className="w-full"
                           >
                             GIVE GRADE

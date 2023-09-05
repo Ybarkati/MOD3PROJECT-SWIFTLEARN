@@ -12,7 +12,7 @@ const commentSchema = new Schema({
       type:Boolean
    },
    grade:{
-      type:String
+      type:Number
    },
    feedback:{
       type:String
