@@ -28,10 +28,12 @@ module.exports.delete = async (req, res) => {
         
         const UserDelete = await User.findOneAndDelete({ code: req.params.id })
         // find the post, storing it in a varaible, then deleting it
+        console.log(UserDelete,"heeeerewere")
         
         if ( UserDelete!=null){
         const post = await Posts.deleteMany({  user: UserDelete.username })
         // deleting all comments where the comment id
+        console.log(post, "niceeeeeee")
         if (post!=null){
             await Comments.deleteMany({ _id: {
                 // matches any comment ids in the given array

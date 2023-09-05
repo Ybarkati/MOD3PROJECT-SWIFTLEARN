@@ -138,7 +138,7 @@ export function Sidenav({ brandImg, brandName, routes ,setUser, username,role}) 
 }
 
 Sidenav.defaultProps = {
-  brandImg: "/img/logo-ct.png",
+  brandImg: "",
   brandName: "Swift learn",
 };
 

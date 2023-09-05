@@ -73,7 +73,7 @@ export function DashboardNavbar() {
         </div>
         <div className="flex items-center">
           <div className="mr-auto md:mr-4 md:w-56">
-            <Input label="Type here" />
+          <img src="https://i.postimg.cc/Kzph0G5D/Screenshot-2023-09-05-010146-removebg-preview.png" className="w-[200px]" alt="" />
           </div>
           <IconButton
             variant="text"

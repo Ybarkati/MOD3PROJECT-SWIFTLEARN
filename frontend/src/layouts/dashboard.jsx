@@ -23,7 +23,7 @@ export function Dashboard({ setUser, loggedIn,role,user }) {
       username={loggedIn} role={role} setUser={setUser}
         routes={routes}
         brandImg={
-          sidenavType === "dark" ? "/img/logo-ct.png" : "/img/logo-ct-dark.png"
+          sidenavType === "dark" ? "https://i.postimg.cc/8cPzZR0J/Screenshot-2023-09-05-014940.png" : "https://i.postimg.cc/8cPzZR0J/Screenshot-2023-09-05-014940.png"
         }
       />
       <div className="p-4 xl:ml-80">
