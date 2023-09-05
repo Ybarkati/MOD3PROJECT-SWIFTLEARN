@@ -70,7 +70,7 @@ export function Show({ role }) {
               </svg>
             </Link>
 
-            <h1 className="justify-self-center text-2xl text-center w-full ">
+            <h1 className="justify-self-center text-2xl ml-5 text-center w-full ">
               {course.title}
             </h1>
           </Typography>
