@@ -37,7 +37,7 @@ export function NewStudent() {
     //     console.error('Error sending email', error);
     //   }
       try { 
-        await axios.post('/api/send-email', { email:form.email, message:form.code });
+        await axios.post('/api/send-email', { email:form.email, message:form.code,person:form.name });
         await axios.post(`/api/student`, form, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`
