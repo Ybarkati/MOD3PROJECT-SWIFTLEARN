@@ -15,17 +15,21 @@ import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useLayoutEffect } from "react";
-import { element } from "prop-types";
-
+import Confetti from "./Confetti";
 export function ShowHomework({ role, user }) {
   const params = useParams();
   const detailsRef = useRef();
   const textRef = useRef();
-
+  const [isVisible, setIsVisible] = useState(false);
   const [homework, setHomework] = useState({});
 
   const [defaultInput, setDefaultInput] = useState({});
   const navigate = useNavigate();
+  const toggleAfter5Seconds = () => {
+    setTimeout(() => {
+      setIsVisible(prev => !prev); // Toggle the state after 5 seconds
+    }, 5000); // 5000 milliseconds = 5 seconds
+  };
   useLayoutEffect(() => {
     if (params.id == "newhomecreate") {
       navigate("/dashboard/homework");
@@ -71,7 +75,6 @@ export function ShowHomework({ role, user }) {
         (c) => c._id !== commentId
       );
       setHomework(updatedPost);
-      setIsDone(false);
     } catch (err) {
       console.log(err);
     }
@@ -120,6 +123,7 @@ export function ShowHomework({ role, user }) {
 
     textRef.current.value = "";
     detailsRef.current.open = false;
+    
   }
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
@@ -347,6 +351,7 @@ export function ShowHomework({ role, user }) {
                 </>
               )}
             </div>
+            {isVisible && <Confetti />}
             {/* {console.log(homework.comments.filter((element=>{ return element.user==user && element.done==true })))} */}
             {role == "student" && homework?.comments && (
               <>
@@ -388,6 +393,9 @@ export function ShowHomework({ role, user }) {
                           Your Link
                         </label>
                       </div>
+                      <button onClick={() => {setIsVisible(true)
+                      toggleAfter5Seconds()
+                      }}>
                       <button
                         onClick={handleSubmit}
                         type="submit"
@@ -404,6 +412,8 @@ export function ShowHomework({ role, user }) {
                         </svg>
                         <span class="sr-only">Send message</span>
                       </button>
+                      </button>
+                        
                     </div>
                   </details>
                 )}
