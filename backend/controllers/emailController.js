@@ -265,8 +265,8 @@ module.exports.create = async (req, res) => {
                 
           <!--[if mso]><style>.v-button {background: transparent !important;}</style><![endif]-->
         <div align="center">
-          <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="#" style="height:62px; v-text-anchor:middle; width:278px;" arcsize="35.5%"  stroke="f" fillcolor="#ed8b03"><w:anchorlock/><center style="color:#FFFFFF;"><![endif]-->
-            <a href="#" target="_blank" class="v-button v-size-width v-font-size" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #ed8b03; border-radius: 22px;-webkit-border-radius: 22px; -moz-border-radius: 22px; width:48%; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;font-size: 14px;">
+          <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://swiftlearn-web.onrender.com/" style="height:62px; v-text-anchor:middle; width:278px;" arcsize="35.5%"  stroke="f" fillcolor="#ed8b03"><w:anchorlock/><center style="color:#FFFFFF;"><![endif]-->
+            <a href="https://swiftlearn-web.onrender.com/" target="_blank" class="v-button v-size-width v-font-size" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #ed8b03; border-radius: 22px;-webkit-border-radius: 22px; -moz-border-radius: 22px; width:48%; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;font-size: 14px;">
               <span style="display:block;padding:23px 30px 22px;line-height:120%;"><strong><span style="font-size: 14px; line-height: 16.8px; font-family: Montserrat, sans-serif;">S E E   F U L L   D E T A I L S</span></strong></span>
             </a>
             <!--[if mso]></center></v:roundrect><![endif]-->
