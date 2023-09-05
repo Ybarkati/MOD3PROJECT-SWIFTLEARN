@@ -31,15 +31,15 @@ module.exports.delete = async (req, res) => {
         console.log(UserDelete,"heeeerewere")
         
         if ( UserDelete!=null){
-        const post = await Posts.deleteMany({  user: UserDelete.username })
-        // deleting all comments where the comment id
-        console.log(post, "niceeeeeee")
-        if (post!=null){
-            await Comments.deleteMany({ _id: {
-                // matches any comment ids in the given array
-                $in: post.comments   
-            }})
-        }
+           const comment= await Comments.deleteMany({ user: UserDelete.username })
+            // then use the post id to find the post
+            console.log(comment)
+            // await Posts.updateMany(req.params.postId, {
+            //     // pull/remeove the reference id of the comment we deleted
+            //     $pull: {
+            //         comments: req.params.commentId
+            //     }
+            // })
         }
         res.status(200).json({ message: 'successfully deleted' })
     } catch(err) {
