@@ -8,9 +8,9 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': 'https://mod3project-swiftlearn.onrender.com',
-      '/authU': 'https://mod3project-swiftlearn.onrender.com',
-      "/send-email":"https://mod3project-swiftlearn.onrender.com"
+      '/api': 'http://localhost:1111',
+      '/authU': 'http://localhost:1111',
+      "/send-email":"http://localhost:1111"
     },
   },
 });
