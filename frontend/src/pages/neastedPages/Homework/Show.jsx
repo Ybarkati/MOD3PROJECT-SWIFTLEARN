@@ -188,6 +188,13 @@ export function ShowHomework({ role, user }) {
                     .map((element) => {
                       return (
                         <div className="inline-flex ml-4 mr-4  mb-4 items-center justify-center p-5 text-base font-medium text-gray-800 rounded-lg bg-green-50 hover:text-gray-900 hover:bg-green-100 dark:text-gray-400 dark:bg-green-800 dark:hover:bg-green-700 dark:hover:text-white">
+                          {element.grade ? 
+                          <img
+                            src={`https://www.svgrepo.com/show/166018/check-mark.svg`}
+                            className="w-4 mr-2"
+                          />:
+                          
+                        
                           <Menu placement="left-start">
                             <MenuHandler>
                               <IconButton
@@ -227,12 +234,13 @@ export function ShowHomework({ role, user }) {
                               </MenuItem>
                             </MenuList>
                           </Menu>
+                    }     <div className="flex flex-col">
                           <a
                             href={element.text}
                             target="_blank"
                             className="inline-flex "
                           >
-                            <span className="w-full">Check your answer</span>
+                            <span className="w-full">Check your answer <br/> </span>
                             <svg
                               className="w-4 h-4 ml-4 mt-1"
                               aria-hidden="true"
@@ -248,7 +256,20 @@ export function ShowHomework({ role, user }) {
                                 d="M1 5h12m0 0L9 1m4 4L9 9"
                               />
                             </svg>
-                          </a>
+                          </a> 
+                          
+                          {element.grade &&  <div className="bg-white/60 rounded-lg shadow-lg p-6 max-w-[500px]">
+      <h2 className="text-2xl font-semibold mb-4">Grade and Feedback</h2>
+      <div className="mb-4">
+        <p className="text-gray-700 text-sm font-semibold">Grade:</p>
+        <p className="text-gray-800 text-lg">{element.grade}</p>
+      </div>
+      <div>
+        <p className="text-gray-700 text-sm font-semibold">Feedback:</p>
+        <p className="text-gray-800">{element.feedback}</p>
+      </div>
+    </div>}
+                          </div>
                         </div>
                       );
                     })}
