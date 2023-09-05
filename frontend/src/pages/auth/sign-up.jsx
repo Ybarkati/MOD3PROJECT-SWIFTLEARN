@@ -60,7 +60,11 @@ export function SignUp({setUser}) {
 
         setUser(userResponse.data)
         console.log('ok2')
-        navigate('/dashboard/home')
+        if ( form.role=="teacher"){
+          navigate('/dashboard/home')
+        }else{
+          navigate("/dashboard/homework")
+        }
 
     } catch(err) {
 

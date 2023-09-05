@@ -15,7 +15,7 @@ import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 export function Dashboard({ setUser, loggedIn,role,user }) {
   const [controller, dispatch] = useMaterialTailwindController();
   const { sidenavType } = controller;
-  const pagesRoutes=[<Home role={role}/>,<Homework user={user} role={role}/>,<Courses user={user} role={role}/>,<Profile role={role}/>]
+  const pagesRoutes=[<Home role={role}/>,<Homework user={user} role={role}/>,<Courses user={user} role={role}/>,<Profile user={user} role={role}/>]
   return (
     <div className="min-h-screen bg-blue-gray-50/50">
       

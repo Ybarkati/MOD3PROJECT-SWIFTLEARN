@@ -45,7 +45,7 @@ export function SignIn({setUser}) {
     
             setUser(userResponse.data)
     
-            navigate('/dashboard/home')
+            navigate('/dashboard/homework')
 
         } catch(err) {
 
