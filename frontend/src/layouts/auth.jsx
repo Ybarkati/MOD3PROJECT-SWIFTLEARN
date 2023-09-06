@@ -17,8 +17,8 @@ export function Auth({setUser}) {
       icon: ChartPieIcon,
     },
     {
-      name: "profile",
-      path: "/dashboard/home",
+      name: "How to use",
+      path: "https://swiftlearn-web-about.onrender.com/",
       icon: UserIcon,
     },
     {

@@ -22,23 +22,46 @@ export function Navbar({ brandName, routes, action }) {
 
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      {routes.map(({ name, path, icon }) => (
-        <Typography
+      {routes.map(({ name, path, icon }) =>{
+        if (name=="How to use"){
+           return(
+            <Typography
           key={name}
           as="li"
           variant="small"
           color="blue-gray"
           className="capitalize"
         >
-          <Link to={path} className="flex items-center gap-1 p-1 font-normal">
+          <a href={path} target="_blank" className="flex items-center gap-1 p-1 font-normal">
             {icon &&
               React.createElement(icon, {
                 className: "w-[18px] h-[18px] opacity-50 mr-1",
               })}
             {name}
-          </Link>
+          </a>
         </Typography>
-      ))}
+           )
+        } else{
+          return(
+            <Typography
+            key={name}
+            as="li"
+            variant="small"
+            color="blue-gray"
+            className="capitalize"
+          >
+            <Link to={path} className="flex items-center gap-1 p-1 font-normal">
+              {icon &&
+                React.createElement(icon, {
+                  className: "w-[18px] h-[18px] opacity-50 mr-1",
+                })}
+              {name}
+            </Link>
+          </Typography>
+          )
+        }
+        
+      })}
     </ul>
   );
 
