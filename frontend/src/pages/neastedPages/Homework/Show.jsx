@@ -22,7 +22,7 @@ export function ShowHomework({ role, user }) {
   const textRef = useRef();
   const [isVisible, setIsVisible] = useState(false);
   const [homework, setHomework] = useState({});
-
+  const [isLoading, setIsLoading] = useState(true)
   const [defaultInput, setDefaultInput] = useState({});
   const navigate = useNavigate();
   const toggleAfter5Seconds = () => {
@@ -41,6 +41,7 @@ export function ShowHomework({ role, user }) {
       const response = await axios.get(`/api/posts/${id}`);
       console.log(response.data);
       setHomework(response.data);
+      setIsLoading(false)
     } catch (err) {
       console.log(err.message);
       navigate("/dashboard/homework");
@@ -125,7 +126,7 @@ export function ShowHomework({ role, user }) {
     detailsRef.current.open = false;
     
   }
-  if (!homework.title){
+  if (isLoading){
     return (
      <div className='flex items-center justify-center min-h-screen'>
            <div style={{borderTopColor:"transparent"}} className="w-8 h-8 border-4 border-blue-200 rounded-full animate-spin"></div>

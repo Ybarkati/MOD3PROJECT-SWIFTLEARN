@@ -20,6 +20,7 @@ import axios from '../../../api'
 
 export function HomeworkIndex({ role }) {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true)
   const [homework, setHomework] = useState([])
   async function getPosts() {
     try {
@@ -31,6 +32,7 @@ export function HomeworkIndex({ role }) {
         })
         setHomework(response.data)
         console.log(response.data)
+        setIsLoading(false)
     } catch(err) {
         console.log(err)
     }
@@ -39,7 +41,7 @@ export function HomeworkIndex({ role }) {
 useEffect(() => {
     getPosts()
 }, [])
-if (homework.length==0){
+if (isLoading){
   return (
    <div className='flex items-center justify-center min-h-screen'>
          <div style={{borderTopColor:"transparent"}} className="w-8 h-8 border-4 border-blue-200 rounded-full animate-spin"></div>
