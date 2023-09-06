@@ -49,6 +49,45 @@ useEffect(() => {
       </div>
      )
   }
+  if (isLoading!=true && course.length==0 && role=="student"){
+     return(
+      <div className="mt-12 mb-8 flex flex-col gap-12">
+      <Card>
+        <CardHeader
+          variant="gradient"
+          color="blue"
+          className="mb-8 p-6 flex items-center justify-between"
+        >
+          <Typography variant="h6" color="white" className="text-xl">
+            Courses
+          </Typography>
+          {role != "student" && (
+            <Menu placement="left-start">
+              <MenuHandler>
+                <IconButton size="sm" variant="text" color="blue-gray">
+                  <EllipsisVerticalIcon
+                    strokeWidth={3}
+                    fill="currenColor"
+                    className="h-6 w-6 text-white"
+                  />
+                </IconButton>
+              </MenuHandler>
+              <MenuList>
+                <MenuItem>
+                  {" "}
+                  <Link to={"newhomecreate"}>Add Course</Link>{" "}
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          )}
+        </CardHeader>
+        <CardBody className="flex align-center justify-center overflow-x-scroll px-0 pt-0 pb-2">
+          <img src="https://i.postimg.cc/W4jJ9C28/NO-RESULTS-FOR-NOW.png" alt="NO results for now" className="max-w-[400px]" />
+        </CardBody>
+      </Card>
+    </div>
+     )
+  }
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
       <Card>
