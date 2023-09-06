@@ -125,6 +125,14 @@ export function ShowHomework({ role, user }) {
     detailsRef.current.open = false;
     
   }
+  if (!homework.title){
+    return (
+     <div className='flex items-center justify-center min-h-screen'>
+           <div style={{borderTopColor:"transparent"}} className="w-8 h-8 border-4 border-blue-200 rounded-full animate-spin"></div>
+           <p className="ml-2">Loading...</p>
+     </div>
+    )
+  }
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
       <Card>
