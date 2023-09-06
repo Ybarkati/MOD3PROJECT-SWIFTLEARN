@@ -14,7 +14,7 @@ export function Show({ role }) {
   const params = useParams();
 
   const [course, setCourse] = useState({});
-
+  const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate();
   useLayoutEffect(() => {
     if (params.id == "newhomecreate") {
@@ -27,6 +27,7 @@ export function Show({ role }) {
       const response = await axios.get(`/api/courses/${id}`);
       console.log(response.data);
       setCourse(response.data);
+      setIsLoading(false)
     } catch (err) {
       console.log(err.message);
       navigate("/dashboard/courses");
@@ -48,7 +49,7 @@ export function Show({ role }) {
   useEffect(() => {
     getCourse();
   }, []);
-  if (!course.title){
+  if (isLoading){
     return (
      <div className='flex items-center justify-center min-h-screen'>
            <div style={{borderTopColor:"transparent"}} className="w-8 h-8 border-4 border-blue-200 rounded-full animate-spin"></div>

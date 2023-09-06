@@ -34,7 +34,7 @@ import { Link, useNavigate } from "react-router-dom";
 export function Student() {
     
     const [Students, setStudents] = useState([])
-
+    const [isLoading, setIsLoading] = useState(true)
     const navigate = useNavigate()
 
     async function getStudents() {
@@ -46,6 +46,7 @@ export function Student() {
                 }
               })
             setStudents(response.data)
+            setIsLoading(false)
         } catch(err) {
             console.log(err)
         }
@@ -66,7 +67,7 @@ export function Student() {
             console.log(err)
         }
     }
-    if (Students.length==0){
+    if (isLoading){
         return (
          <div className='flex items-center justify-center min-h-screen'>
                <div style={{borderTopColor:"transparent"}} className="w-8 h-8 border-4 border-blue-200 rounded-full animate-spin"></div>

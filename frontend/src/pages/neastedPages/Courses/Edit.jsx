@@ -15,7 +15,7 @@ import { useEffect, useLayoutEffect, useState } from "react";
 
 export function CourseEdit({user}) {
   const [course, setCourse] = useState({})
-
+  const [isLoading, setIsLoading] = useState(true)
   const { id } = useParams()
   const navigate = useNavigate()
 
@@ -29,6 +29,7 @@ export function CourseEdit({user}) {
           }
           console.log(response.data)
           setCourse(response.data)
+          setIsLoading(false)
       } catch(err) {
           console.log(err.message)
           navigate('/dashboard/course')
@@ -103,7 +104,7 @@ export function CourseEdit({user}) {
   useEffect(()=>{
     getInfo(course.courseId,course.title,course.Published,course.ableDownload,course.due,course.courseId)
   },[course.title])
-  if (!course.title){
+  if (isLoading){
     return (
      <div className='flex items-center justify-center min-h-screen'>
            <div style={{borderTopColor:"transparent"}} className="w-8 h-8 border-4 border-blue-200 rounded-full animate-spin"></div>

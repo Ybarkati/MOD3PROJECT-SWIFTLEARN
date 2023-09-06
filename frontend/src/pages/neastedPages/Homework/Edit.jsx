@@ -108,9 +108,7 @@ export function HomeworkEdit({user}) {
   useEffect(()=>{
     getInfo(homework.homeworkId,homework.title,homework.Published,homework.ableDownload,homework.due,homework.homeworkId)
   },[homework.title])
-  if (!homework._id) {
-    return <div>Loading...</div>
-}
+
 if (isLoading){
   return (
    <div className='flex items-center justify-center min-h-screen'>
